@@ -4,7 +4,7 @@ title:      由Actor-Critic引发的策略梯度方法
 subtitle:   Policy Gradient
 date:       2018-12-05
 author:     Hybot
-header-img: img/20181205-pic-1.png
+header-img: img/post-bg-2015.jpg
 catalog: true
 tags:
     - AI
