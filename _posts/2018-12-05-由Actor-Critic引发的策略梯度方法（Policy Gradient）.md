@@ -4,7 +4,7 @@ title:      由Actor-Critic引发的策略梯度方法
 subtitle:   Policy Gradient
 date:       2018-12-05
 author:     Hybot
-header-img: img/post-md.jpg
+header-img: img/20181205-pic-1.png
 catalog: true
 tags:
     - AI
@@ -32,7 +32,7 @@ bingo，有了疑惑，就可以去找答案了，虽然学习过程中贪了时
 
 先上公式：
 
-![](https://github.com/hybug/hybug.github.io/blob/master/img/20181205-pic-2.png)
+![](https://github.com/hybug/hybug.github.io/blob/master/img/20181205-pic-2.png?raw=true)
 
 含义是，在状态s下，动作a符合参数为θ的概率分布，比较常用的高斯策略：就是在状态s下，采用的动作a符合均值为mu，方差为sigma的正态分布。
 是不是又眼熟了，莫烦老师在AC算法的代码中就是用到的这种策略，如果你在那个时候就又疑问的话，这就是疑问的答案。
@@ -45,7 +45,7 @@ bingo，有了疑惑，就可以去找答案了，虽然学习过程中贪了时
 
 随机策略的梯度计算公式如下：
 
-![](https://github.com/hybug/hybug.github.io/blob/master/img/20181205-pic-3.png)
+![](https://github.com/hybug/hybug.github.io/blob/master/img/20181205-pic-3.png?raw=true)
 
 可以体验到，AC在gym各种简单的游戏中，依然需要很长时间才能收敛。原因是梯度是Q值的期望，**因为action的值有一定的随机性，所以期望的求解需要对状态分布和动作分布进行积分运算**，因此需要采样大量样本。
 
@@ -71,13 +71,13 @@ bingo，有了疑惑，就可以去找答案了，虽然学习过程中贪了时
 
 AC的确定性策略梯度如下：
 
-![](https://github.com/hybug/hybug.github.io/blob/master/img/20181205-pic-4.png)
+![](https://github.com/hybug/hybug.github.io/blob/master/img/20181205-pic-4.png?raw=true)
 
 少了对动作的积分，多了Q值（回报函数）对动作的导数
 
 AC的off-policy策略梯度如下：
 
-![](https://github.com/hybug/hybug.github.io/blob/master/img/20181205-pic-5.png)
+![](https://github.com/hybug/hybug.github.io/blob/master/img/20181205-pic-5.png?raw=true)
 
 这就是DPG，换而言之，就是随机策略的AC+Q-Learning
 
@@ -90,7 +90,7 @@ RL变成DRL，深度网络数据输入都是要求独立同分布的，然而符
 照本宣科，DDPG也需要这两个trick，其中经验回放和DQN一模一样，不做介绍。
 不一样的是DDPG如何更新目标网络，直接给出结果（推导晕了）：
 
-![](https://github.com/hybug/hybug.github.io/blob/master/img/20181205-pic-6.png)
+![](https://github.com/hybug/hybug.github.io/blob/master/img/20181205-pic-6.png?raw=true)
 
 我们只需要对θ和w进行更新就ok啦。
 
