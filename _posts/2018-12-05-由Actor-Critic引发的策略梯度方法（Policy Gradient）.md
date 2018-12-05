@@ -31,6 +31,7 @@ bingo，有了疑惑，就可以去找答案了，虽然学习过程中贪了时
 # 1.随机策略搜索
 
 先上公式：
+
 ![](https://github.com/hybug/hybug.github.io/blob/master/img/20181205-pic-2.png)
 
 含义是，在状态s下，动作a符合参数为θ的概率分布，比较常用的高斯策略：就是在状态s下，采用的动作a符合均值为mu，方差为sigma的正态分布。
@@ -50,7 +51,6 @@ bingo，有了疑惑，就可以去找答案了，虽然学习过程中贪了时
 
 ## 1.2 随机策略的优点
 
-<meta charset="utf-8">
 
 * **探索和改进同步进行**
 
@@ -70,11 +70,13 @@ bingo，有了疑惑，就可以去找答案了，虽然学习过程中贪了时
 什么叫off-policy，就是离线策略。行动策略和评估策略并不是同一个策略，其中行动策略是随机策略，而评估策略是确定性策略，这样我们的agent不但拥有了探索学习能力，也不需要通过计算耗时的积分来获得梯度更新值。
 
 AC的确定性策略梯度如下：
+
 ![](https://github.com/hybug/hybug.github.io/blob/master/img/20181205-pic-4.png)
 
 少了对动作的积分，多了Q值（回报函数）对动作的导数
 
 AC的off-policy策略梯度如下：
+
 ![](https://github.com/hybug/hybug.github.io/blob/master/img/20181205-pic-5.png)
 
 这就是DPG，换而言之，就是随机策略的AC+Q-Learning
