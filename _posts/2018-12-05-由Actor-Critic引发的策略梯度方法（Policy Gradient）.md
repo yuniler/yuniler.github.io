@@ -16,7 +16,7 @@ Policy-Based方法大家都知道模型可以直接给你一个策略方法，ag
 
 先抛出结论，策略搜索方法如下图分类：
 
-![](https://images.ifanr.cn/wp-content/uploads/2018/06/WWDC-10.jpg)
+![](https://github.com/hybug/hybug.github.io/blob/master/img/20181205-pic-1.png?raw=true)
 
 
 重点聚焦于无模型的策略搜索方法：
