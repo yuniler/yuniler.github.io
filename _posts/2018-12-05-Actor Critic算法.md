@@ -54,17 +54,17 @@ PG就是Policy Gradient的缩写啊，虽然算法用到的不多，我们还是
 
 了解一个网络，第一步了解网络的输入和输出，我们需要state来输出action，我们需要action和td_error来计算loss值。
 
-···
+```
 self.s = tf.placeholder(tf.float32, [1, n_features], "state")
 self.a = tf.placeholder(tf.float32, None, name="act")
 self.td_error = tf.placeholder(tf.float32, None, name="td_error")  # TD_error
-···
+```
 
 * **Actor网络实现**
 
 我们使用的gym中的那个让棒子保持平衡的游戏，游戏很简单，所以使用的是全连接层，然而我的需求是肯定需要使用CNN的，理论上CNN应该也没问题，但是得试试。
 
-···
+```
 l1 = tf.layers.dense(
     inputs=self.s,
     units=30,  # number of hidden units
@@ -91,11 +91,11 @@ sigma = tf.layers.dense(
     bias_initializer=tf.constant_initializer(1.),  # biases
     name='sigma'
 )
-···
+```
 
 如何让我们的全连接层网络输出连续的action值呢，使用了tf.distribution.normal函数，具体方法另一篇笔记中记录了。
 
-···
+```
 with tf.name_scope('exp_v'):
     log_prob = self.normal_dist.log_prob(self.a)  # loss without advantage
     self.exp_v = log_prob * self.td_error  # advantage (TD_error) guided loss
@@ -104,7 +104,7 @@ with tf.name_scope('exp_v'):
 
 with tf.name_scope('train'):
     self.train_op = tf.train.AdamOptimizer(lr).minimize(-self.exp_v, global_step)    # min(v) = max(-v)
-···
+```
 
 **loss = -log(prob)*ttd_error**
 
@@ -112,23 +112,23 @@ with tf.name_scope('train'):
 
 * **Action的选择**
 
-···
+```
 def choose_action(self, s):
     s = s[np.newaxis, :]
     return self.sess.run(self.action, {self.s: s})  # get probabilities for all actions
-···
+```
 
 * **Actor的训练**
 
 输入state，action，ed_errror，得到我们需要的值
 
-···
+```
 def learn(self, s, a, td):
     s = s[np.newaxis, :]
     feed_dict = {self.s: s, self.a: a, self.td_error: td}
     _, exp_v = self.sess.run([self.train_op, self.exp_v], feed_dict)
     return exp_v
-···
+```
 
 ## 2.2 Critic网络
 
@@ -140,7 +140,7 @@ v表示s输入到critic网络中得到的Value值/Q值，我们需要输入s得�
 
 * **Critic网络结构**
 
-···
+```
 with tf.variable_scope('Critic'):
     l1 = tf.layers.dense(
         inputs=self.s,
@@ -164,11 +164,11 @@ with tf.variable_scope('Critic'):
     self.loss = tf.square(self.td_error)    # TD_error = (r+gamma*V_next) - V_eval
 with tf.variable_scope('train'):
     self.train_op = tf.train.AdamOptimizer(lr).minimize(self.loss)
-···
+```
 
 * **TD计算和训练**
 
-···
+```
 def learn(self, s, r, s_):
     s, s_ = s[np.newaxis, :], s_[np.newaxis, :]
 
@@ -176,11 +176,11 @@ def learn(self, s, r, s_):
     td_error, _ = self.sess.run([self.td_error, self.train_op],
                                       {self.s: s, self.v_: v_, self.r: r})
     return td_error
-···
+```
 
 ## 2.3 AC网络训练
 
-···
+```
 for i_episode in range(MAX_EPISODE):
     s = env.reset()
     t = 0
@@ -199,7 +199,7 @@ for i_episode in range(MAX_EPISODE):
         s = s_
         t += 1
         ep_rs.append(r)
-···
+```
 
 # 3.参考资料
 
