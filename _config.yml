@@ -1,10 +1,10 @@
 # Site settings
 title: HanYu Blog
-SEOTitle: 韩禹的博客 | HanYu Blog
+SEOTitle: 孙广宇的博客 | HanYu Blog
 header-img: img/post-bg-desk.jpg
 email: hanyu.bug@qq.com
 description: "Life is fantastic, isn't it?"
-keyword: "HY, HY Blog, 韩禹的博客, Hybot, AI, DRL, Android"
+keyword: "HY, HY Blog, 孙广宇的博客, Hybot, AI, DRL, Android"
 url: "http://hybug.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/hybug?tab=repositories" # you code repository
